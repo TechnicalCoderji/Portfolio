@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Desktop only */
+@media (max-width: 1023px) {
+  .app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #1d2326;
+    color: #fff;
+    font-family: system-ui, -apple-system, sans-serif;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .app::before {
+    content: 'This experience is optimized for desktop (min-width: 1024px)';
+    font-size: 1.25rem;
+  }
+
+  .app > * {
+    display: none;
+  }
+}
+
+/* Ensure smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optimize canvas rendering */
+canvas {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
