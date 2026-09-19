@@ -1,156 +1,52 @@
 .how-i-think-section {
-  min-height: 100vh;
+  padding: 80px 0;
   background: #0C131A;
-  padding: 8rem 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.how-i-think-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.how-i-think-title {
-  font-size: 3rem;
-  font-weight: 800;
   color: #ffffff;
-  margin: 0 0 5rem 0;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.8s ease forwards;
+}
+
+.section-subtext {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: -24px 0 40px 0;
+  line-height: 1.6;
+}
+
+.section-subtext .highlight-text {
+  color: #ffffff;
+  font-weight: 600;
 }
 
 .steps-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2.5rem;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.8s ease 0.2s forwards;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
 }
 
 .step-card {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 255, 255, 0.02) 100%
-  );
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 3rem 2rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  text-align: left;
-}
-
-.step-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.4s;
-  pointer-events: none;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 24px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .step-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  border-color: rgba(255, 107, 107, 0.3);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-}
-
-.step-card:hover::before {
-  opacity: 1;
+  transform: translateY(-4px);
+  border-color: rgba(255, 59, 48, 0.3);
 }
 
 .step-number {
-  font-size: 3rem;
-  font-weight: 800;
-  background: linear-gradient(120deg, #ff6b6b, #ff4444);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 1rem;
+  font-size: 24px;
+  font-weight: 700;
+  color: #ff3b30;
+  margin-bottom: 12px;
   line-height: 1;
-  filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.3));
 }
 
 .step-title {
-  font-size: 1.35rem;
+  font-size: 16px;
   font-weight: 600;
   color: #ffffff;
   margin: 0;
   line-height: 1.5;
-  letter-spacing: -0.01em;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Responsive */
-@media (max-width: 1200px) {
-  .how-i-think-section {
-    padding: 6rem 3rem;
-  }
-
-  .how-i-think-title {
-    font-size: 2.5rem;
-    margin-bottom: 4rem;
-  }
-
-  .steps-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2rem;
-  }
-
-  .step-number {
-    font-size: 2.5rem;
-  }
-
-  .step-title {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .how-i-think-section {
-    padding: 4rem 2rem;
-  }
-
-  .how-i-think-title {
-    font-size: 2rem;
-    margin-bottom: 3rem;
-  }
-
-  .steps-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .step-card {
-    padding: 2.5rem 1.5rem;
-  }
-
-  .step-number {
-    font-size: 2rem;
-  }
-
-  .step-title {
-    font-size: 1.1rem;
-  }
 }

@@ -1,0 +1,36 @@
+[
+  {
+    "id": "logic-craft",
+    "title": "Logic-Craft",
+    "tag": "Visual Logic System Simulator",
+    "description": "A system designed to simulate and understand real-time logic circuits, enabling deeper reasoning and structured thinking.",
+    "highlight": "Real-time signal propagation across logic gates",
+    "image": "/images/logic-craft.png",
+    "github": "https://github.com"
+  },
+  {
+    "id": "callsense",
+    "title": "CallSense",
+    "tag": "AI-driven insight system",
+    "description": "Processes bulk customer voice recordings and extracts core problems with ranking.",
+    "highlight": "Hackathon winning project with practical execution",
+    "role": "My role: Integrating APIs and handling system flow between frontend and backend.",
+    "github": "https://github.com"
+  },
+  {
+    "id": "sudoku-canvas",
+    "title": "Sudoku Canvas",
+    "tag": "Algorithm + UI",
+    "description": "Built using backtracking and state management.",
+    "highlight": "Efficient solving with clean UI",
+    "github": "https://github.com"
+  },
+  {
+    "id": "minesweeper",
+    "title": "Minesweeper",
+    "tag": "Logic-based system",
+    "description": "Game focused on reasoning and validation.",
+    "highlight": "Accurate game-state handling",
+    "github": "https://github.com"
+  }
+]

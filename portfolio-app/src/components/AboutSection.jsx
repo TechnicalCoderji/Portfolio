@@ -3,20 +3,22 @@ import './AboutSection.css';
 const AboutSection = () => {
   return (
     <section id="about" className="about-section">
-      <div className="about-container">
-        <h2 className="about-title">About</h2>
+      <div className="section-container">
+        <h2 className="section-title">About</h2>
         <div className="about-content">
           <p className="about-text">
-            I started coding because it was interesting.
+            I started coding in 2023 during my diploma.
           </p>
           <p className="about-text">
-            I stayed because it challenged how I think.
+            At first, it was just interesting.<br />
+            But I stayed because it challenged how I think.
           </p>
           <p className="about-text">
-            I enjoy building systems that require logic, structure, and creativity.
+            I enjoy solving complex problems more than building typical full-stack apps.
           </p>
           <p className="about-text highlight">
-            My goal is not just to write code — but to build solutions that make sense.
+            For me, coding is not just about output —<br />
+            it's about understanding the program itself.
           </p>
         </div>
       </div>

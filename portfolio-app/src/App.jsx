@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import HeroSection from './components/HeroSection';
 import Navbar from './components/Navbar';
 import ProjectsSection from './components/ProjectsSection';
@@ -10,23 +10,9 @@ import ContactSection from './components/ContactSection';
 import './App.css';
 
 function App() {
-  const [showNavbar, setShowNavbar] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Show navbar after hero section (after first viewport height)
-      if (window.scrollY > window.innerHeight * 1.5 && !showNavbar) {
-        setShowNavbar(true);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [showNavbar]);
-
   return (
     <div className="app" id="home">
-      <Navbar isVisible={showNavbar} />
+      <Navbar />
       <HeroSection />
       <ProjectsSection />
       <SkillsSection />

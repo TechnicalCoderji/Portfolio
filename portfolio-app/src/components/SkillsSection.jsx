@@ -1,8 +1,6 @@
 import './SkillsSection.css';
 
 const skills = [
-  'Logic Engineering',
-  'Backend Systems',
   'Problem Solving',
   'Critical Thinking',
   'Creative Development'
@@ -11,11 +9,12 @@ const skills = [
 const SkillsSection = () => {
   return (
     <section id="skills" className="skills-section">
-      <div className="skills-container">
-        <h2 className="skills-title">Core Strengths</h2>
+      <div className="section-container">
+        <h2 className="section-title">Skills</h2>
         <div className="skills-grid">
           {skills.map((skill, index) => (
-            <div key={index} className="skill-block">
+            <div key={index} className="skill-card">
+              <div className="skill-accent-bar" />
               <span className="skill-text">{skill}</span>
             </div>
           ))}

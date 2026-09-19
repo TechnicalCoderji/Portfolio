@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const TOTAL_FRAMES = 120;
 const SLOWDOWN_FACTOR = 0.9;
-const END_THRESHOLD = 0.95; // 95% progress triggers ending
+const END_THRESHOLD = 0.95; // 95% progress triggers ending lock
 
 // Color stops for background interpolation
 const colorStops = [
@@ -43,7 +43,7 @@ const interpolateColor = (progress) => {
   return `rgb(${r}, ${g}, ${b})`;
 };
 
-const HeroSection = () => {
+const HeroSection = ({ onUnlockScroll, onIntroComplete }) => {
   const containerRef = useRef(null);
   const stickyRef = useRef(null);
   const canvasWrapperRef = useRef(null);
@@ -55,11 +55,6 @@ const HeroSection = () => {
   const [hasReachedEnd, setHasReachedEnd] = useState(false);
   const [isAnimationLocked, setIsAnimationLocked] = useState(false);
 
-  // Scroll blocking handlers
-  const preventScrollRef = useRef(null);
-  const preventTouchRef = useRef(null);
-  const preventKeysRef = useRef(null);
-
   const handleFrameChange = useCallback((frameIndex) => {
     if (!isAnimationLocked) {
       setCurrentFrame(frameIndex);
@@ -70,41 +65,37 @@ const HeroSection = () => {
     setIsLoaded(true);
   }, []);
 
-  const handleScrollToPortfolio = useCallback(() => {
-    // Remove scroll lock
-    document.body.style.overflow = "auto";
-    document.documentElement.style.overflow = "auto";
+  const handleScrollToProjects = useCallback(() => {
+    // 1. Restore scroll position
+    const scrollY = Math.abs(parseInt(document.body.style.top || "0", 10));
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    window.scrollTo(0, scrollY);
 
-    // Remove all blocking event listeners
-    if (preventScrollRef.current) {
-      window.removeEventListener("wheel", preventScrollRef.current, { passive: false });
-      preventScrollRef.current = null;
-    }
-    if (preventTouchRef.current) {
-      window.removeEventListener("touchmove", preventTouchRef.current, { passive: false });
-      preventTouchRef.current = null;
-    }
-    if (preventKeysRef.current) {
-      window.removeEventListener("keydown", preventKeysRef.current);
-      preventKeysRef.current = null;
-    }
-
-    // Disable ScrollTrigger
+    // 2. Kill ScrollTrigger
     if (scrollTriggerRef.current) {
       scrollTriggerRef.current.kill();
     }
 
-    // Smooth scroll to next section
-    const portfolioSection = document.getElementById('portfolio-section');
-    if (portfolioSection) {
-      portfolioSection.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+    // 3. Notify App to reveal Navbar
+    if (onUnlockScroll) {
+      onUnlockScroll();
     }
-  }, []);
 
-  // Setup scroll-based effects
+    // 4. Smooth scroll to Projects section
+    setTimeout(() => {
+      const projectsSection = document.getElementById('projects');
+      if (projectsSection) {
+        projectsSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }, 10);
+  }, [onUnlockScroll]);
+
+  // Setup scroll-based animation and lock
   useEffect(() => {
     if (!containerRef.current || !isLoaded || isAnimationLocked) return;
 
@@ -122,51 +113,30 @@ const HeroSection = () => {
 
           setScrollProgress(adjustedProgress);
 
-          // Check if we've reached the end threshold
+          // Check if intro animation reaches end (>= 95%)
           if (adjustedProgress >= END_THRESHOLD && !hasReachedEnd) {
             setHasReachedEnd(true);
             setIsAnimationLocked(true);
-            // Lock at final frame
+            
+            // Freeze frame completely at final frame
             setCurrentFrame(TOTAL_FRAMES - 1);
 
-            // COMPLETE SCROLL LOCK - NO AUTO-SCROLL
-            // 1. Hide overflow on both body and html
-            document.body.style.overflow = "hidden";
-            document.documentElement.style.overflow = "hidden";
+            // Show navbar immediately
+            if (onIntroComplete) {
+              onIntroComplete();
+            }
 
-            // 2. Save current scroll position
+            // HARD SCROLL LOCK: position fixed
             const lockY = window.scrollY;
-
-            // 3. Force scroll position
-            window.scrollTo(0, lockY);
-
-            // 4. Block ALL scroll inputs
-            const preventScroll = (e) => {
-              e.preventDefault();
-              e.stopPropagation();
-            };
-
-            const preventKeys = (e) => {
-              const keys = ["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Space", "Home", "End"];
-              if (keys.includes(e.code) || e.code === "Space") {
-                e.preventDefault();
-                e.stopPropagation();
-              }
-            };
-
-            preventScrollRef.current = preventScroll;
-            preventTouchRef.current = preventScroll;
-            preventKeysRef.current = preventKeys;
-
-            window.addEventListener("wheel", preventScroll, { passive: false });
-            window.addEventListener("touchmove", preventScroll, { passive: false });
-            window.addEventListener("keydown", preventKeys, false);
+            document.body.style.position = "fixed";
+            document.body.style.top = `-${lockY}px`;
+            document.body.style.width = "100%";
           }
 
-          // Update background color
+          // Update background color continuously during scroll
           setBackgroundColor(interpolateColor(adjustedProgress));
 
-          // Update zoom
+          // Update zoom effect on canvas wrapper
           if (canvasWrapperRef.current && !hasReachedEnd) {
             const scale = 1 + adjustedProgress * 0.05;
             gsap.set(canvasWrapperRef.current, {
@@ -180,16 +150,6 @@ const HeroSection = () => {
 
     return () => {
       ctx.revert();
-      // Cleanup event listeners on unmount
-      if (preventScrollRef.current) {
-        window.removeEventListener("wheel", preventScrollRef.current, { passive: false });
-      }
-      if (preventTouchRef.current) {
-        window.removeEventListener("touchmove", preventTouchRef.current, { passive: false });
-      }
-      if (preventKeysRef.current) {
-        window.removeEventListener("keydown", preventKeysRef.current);
-      }
     };
   }, [isLoaded, hasReachedEnd, isAnimationLocked]);
 
@@ -227,7 +187,7 @@ const HeroSection = () => {
             width: '100%',
             height: '100%',
             pointerEvents: 'none',
-            background: 'radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.3) 100%)',
+            background: 'radial-gradient(circle at center, transparent 30%, rgba(12,19,26,0.6) 100%)',
             zIndex: 1
           }}
         />
@@ -244,7 +204,7 @@ const HeroSection = () => {
             overflow: 'hidden',
             maskImage: 'radial-gradient(ellipse 100% 100% at center, black 60%, transparent 100%)',
             WebkitMaskImage: 'radial-gradient(ellipse 100% 100% at center, black 60%, transparent 100%)',
-            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.4)'
+            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.6)'
           }}
         >
           <FrameCanvas
@@ -259,7 +219,7 @@ const HeroSection = () => {
 
         {/* Final Cards (appear at end with lock) */}
         {isLoaded && hasReachedEnd && (
-          <FinalCards onScrollClick={handleScrollToPortfolio} />
+          <FinalCards onScrollClick={handleScrollToProjects} />
         )}
       </div>
     </div>

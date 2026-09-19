@@ -9,8 +9,8 @@ const achievements = [
 const AchievementsSection = () => {
   return (
     <section id="achievements" className="achievements-section">
-      <div className="achievements-container">
-        <h2 className="achievements-title">Achievements</h2>
+      <div className="section-container">
+        <h2 className="section-title">Achievements</h2>
         <div className="achievements-list">
           {achievements.map((achievement, index) => (
             <div key={index} className="achievement-item">
