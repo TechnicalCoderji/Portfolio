@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ showNavbar }) => {
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
@@ -34,8 +34,10 @@ const Navbar = () => {
     }
   };
 
+  const isVisible = showNavbar || activeSection !== 'home';
+
   return (
-    <header className="navbar">
+    <header className={`navbar ${isVisible ? 'navbar-visible' : ''}`}>
       <div className="navbar-container">
         <div className="navbar-logo" onClick={() => scrollToSection('home')}>
           Dip Parmar

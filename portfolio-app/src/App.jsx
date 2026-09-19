@@ -10,10 +10,12 @@ import ContactSection from './components/ContactSection';
 import './App.css';
 
 function App() {
+  const [showNavbar, setShowNavbar] = useState(false);
+
   return (
     <div className="app" id="home">
-      <Navbar />
-      <HeroSection />
+      <Navbar showNavbar={showNavbar} />
+      <HeroSection onIntroComplete={() => setShowNavbar(true)} />
       <ProjectsSection />
       <SkillsSection />
       <HowIThinkSection />
