@@ -22,6 +22,10 @@ A cinematic, scroll-driven portfolio where user scroll controls animation frame-
 - Final scroll lock with button-triggered transition
 - Desktop responsive design
 
+## Live Demo
+
+[![Live Demo](https://img.shields.io/badge/View-Live%20Portfolio-black?style=for-the-badge)](https://dip-parmar-portfolio.netlify.app/)
+
 ## Project Philosophy
 
 **"Most developers focus on output. I focus on the program."**
