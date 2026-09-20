@@ -1,79 +1,61 @@
-# Portfolio App - Frame-Based Scroll Animation
+# Dip Parmar Portfolio
 
-A cinematic scroll-driven animation using an image sequence (120 frames at 24 FPS).
+"Thinking beyond code."
+
+A cinematic, scroll-driven portfolio where user scroll controls animation frame-by-frame to create an immersive storytelling experience.
+
+## Preview
+
+<div align="center">
+  <img src="public/images/preview-1.png" width="24%" />
+  <img src="public/images/preview-2.png" width="24%" />
+  <img src="public/images/preview-3.png" width="24%" />
+  <img src="public/images/preview-4.png" width="24%" />
+</div>
 
 ## Features
 
-- **Frame-Based Animation**: Uses image sequence instead of video for smooth, controllable playback
-- **Scroll Control**: GSAP ScrollTrigger for bidirectional scroll control
-- **Canvas Rendering**: High-performance canvas-based frame rendering
-- **Color Transitions**: Smooth background color interpolation during scroll
-- **Cinematic Effects**: Subtle zoom and vignette overlay
-- **Performance Optimized**: Preloaded images with loading progress
+- Scroll-controlled frame animation
+- Frame-based rendering (not video)
+- Smooth background color transitions
+- Cinematic UI overlay cards (storytelling)
+- Final scroll lock with button-triggered transition
+- Desktop responsive design
+
+## Project Philosophy
+
+**"Most developers focus on output. I focus on the program."**
+
+- Focus on logic and structure
+- Understanding systems deeply
+- Designing how things work, not just UI
+
+## Tech Stack
+
+- React
+- Vite
+- GSAP (ScrollTrigger)
+- Canvas API
+
+## How It Works
+
+- 120 frames (24 FPS)
+- Scroll mapped to frame index
+- Canvas rendering for smooth playback
+- Preloading for performance
+
+## Project Structure
+
+- `src` → components, hooks, logic
+- `public/frames` → animation frames
+- `public/images` → assets
 
 ## Setup
 
-1. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-2. **Add your frames**:
-   - Place your image sequence in `/public/frames/`
-   - Naming convention: `ezgif-frame-001.jpg` to `ezgif-frame-120.jpg`
-   - Ensure you have exactly 120 frames
-
-3. **Run the development server**:
-   ```bash
-   npm run dev
-   ```
-
-## Technical Details
-
-### Frame System
-- **Total Frames**: 120 (5 seconds at 24 FPS)
-- **Format**: JPG images
-- **Resolution**: Any (automatically scaled with aspect ratio maintained)
-- **Margin**: 4% minimum on all sides
-
-### Background Colors (by scroll progress)
-- 0% → #dadee0
-- 25% → #a9aaa7
-- 50% → #000000
-- 75% → #0b1011
-- 100% → #1d2326
-
-### Effects
-- Zoom: 1.0 → 1.05 scale
-- Vignette: Radial gradient overlay
-- Smooth easing: power3.out
-
-## Structure
-
+```bash
+npm install
+npm run dev
 ```
-src/
-├── components/
-│   ├── FrameCanvas.jsx      # Canvas rendering & image loading
-│   └── HeroSection.jsx       # Layout & scroll orchestration
-├── hooks/
-│   └── useScrollFrames.js    # GSAP scroll-to-frame mapping
-├── App.jsx
-└── App.css
-```
-
-## Requirements
-
-- Desktop only (min-width: 1024px)
-- Modern browser with Canvas support
-- GSAP 3.x
-
-## Performance Notes
-
-- All frames are preloaded before animation starts
-- Loading progress displayed during preload
-- RequestAnimationFrame used for smooth updates
-- Canvas rendering optimized for 60 FPS
-- No re-renders during scroll (refs used)
 
 ## Build
 
@@ -81,8 +63,13 @@ src/
 npm run build
 ```
 
-## Preview Production Build
+## Author
 
-```bash
-npm run preview
-```
+**Dip Parmar**  
+GitHub: [TechnicalCoderji](https://github.com/TechnicalCoderji)  
+LinkedIn: [Dip Parmar](https://www.linkedin.com/in/dip-parmar-299792458-ms)  
+Email: dipparmar4637@gmail.com
+
+## License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
