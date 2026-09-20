@@ -23,7 +23,7 @@ A cinematic, scroll-driven portfolio where user scroll controls animation frame-
 - Desktop responsive design
 
 ## Live Demo
-
+> **Note:** Only work on desktop <br>
 [![Live Demo](https://img.shields.io/badge/View-Live%20Portfolio-black?style=for-the-badge)](https://dip-parmar-portfolio.netlify.app/)
 
 ## Project Philosophy
